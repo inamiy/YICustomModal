@@ -14,8 +14,8 @@
 //
 @interface UIViewController (YICustomModal)
 
-@property (nonatomic, strong, readonly) UIViewController* customModalViewController;
-@property (nonatomic, strong, readonly) UIViewController* customParentViewController;
+@property (nonatomic, readonly) UIViewController* customModalViewController;
+@property (nonatomic, readonly) UIViewController* customParentViewController;
 
 // currently supports UIModalTransitionStyleCoverVertical & UIModalTransitionStyleCrossDissolve
 @property (nonatomic) UIModalTransitionStyle customModalTransitionStyle;

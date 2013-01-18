@@ -21,6 +21,11 @@ static NSUInteger __counter = 0;
 
 @implementation ViewController
 
+- (void)dealloc
+{
+    NSLog(@"dealloc");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

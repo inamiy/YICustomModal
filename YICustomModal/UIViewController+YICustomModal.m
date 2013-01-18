@@ -35,7 +35,7 @@ const char __customModalTransitionStyleKey;
 
 - (void)_setCustomParentViewController:(UIViewController*)customModalViewController;
 {
-    objc_setAssociatedObject(self, &__customParentViewControllerKey, customModalViewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &__customParentViewControllerKey, customModalViewController, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (UIViewController*)customParentViewController
