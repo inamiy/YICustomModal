@@ -19,8 +19,6 @@
 		487850EA16A7D4F600355A31 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487850E816A7D4F600355A31 /* MainStoryboard.storyboard */; };
 		487850ED16A7D4F600355A31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487850EC16A7D4F600355A31 /* ViewController.m */; };
 		487850F616A7D52800355A31 /* UIViewController+YICustomModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 487850F516A7D52800355A31 /* UIViewController+YICustomModal.m */; };
-		4878511716A80C5E00355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4878510E16A808B800355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.m */; };
-		4878511816A80C6F00355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4878510F16A808B800355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,10 +41,6 @@
 		487850F416A7D52800355A31 /* UIViewController+YICustomModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YICustomModal.h"; sourceTree = "<group>"; };
 		487850F516A7D52800355A31 /* UIViewController+YICustomModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YICustomModal.m"; sourceTree = "<group>"; };
 		4878510B16A808B800355A31 /* YICustomModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YICustomModal.h; sourceTree = "<group>"; };
-		4878510C16A808B800355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+YICustomModalNoRotatingHeaderFooter.h"; sourceTree = "<group>"; };
-		4878510D16A808B800355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+YICustomModalNoRotatingHeaderFooter.h"; sourceTree = "<group>"; };
-		4878510E16A808B800355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+YICustomModalNoRotatingHeaderFooter.m"; sourceTree = "<group>"; };
-		4878510F16A808B800355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+YICustomModalNoRotatingHeaderFooter.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,10 +118,6 @@
 				4878510B16A808B800355A31 /* YICustomModal.h */,
 				487850F416A7D52800355A31 /* UIViewController+YICustomModal.h */,
 				487850F516A7D52800355A31 /* UIViewController+YICustomModal.m */,
-				4878510D16A808B800355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.h */,
-				4878510F16A808B800355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.m */,
-				4878510C16A808B800355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.h */,
-				4878510E16A808B800355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.m */,
 			);
 			path = YICustomModal;
 			sourceTree = "<group>";
@@ -202,8 +192,6 @@
 				487850E116A7D4F600355A31 /* AppDelegate.m in Sources */,
 				487850ED16A7D4F600355A31 /* ViewController.m in Sources */,
 				487850F616A7D52800355A31 /* UIViewController+YICustomModal.m in Sources */,
-				4878511716A80C5E00355A31 /* UITabBarController+YICustomModalNoRotatingHeaderFooter.m in Sources */,
-				4878511816A80C6F00355A31 /* UINavigationController+YICustomModalNoRotatingHeaderFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,3 @@
 //
 
 #import "UIViewController+YICustomModal.h"
-
-// suppress UITabBar/NavigationBar rotating header/footer views on rotation (optional)
-#import "UINavigationController+YICustomModalNoRotatingHeaderFooter.h"
-#import "UITabBarController+YICustomModalNoRotatingHeaderFooter.h"

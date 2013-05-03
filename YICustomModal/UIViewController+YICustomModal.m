@@ -15,9 +15,9 @@
 
 #define ANIMATION_DURATION  0.4
 
-const char __customModalViewControllerKey;
-const char __customParentViewControllerKey;
-const char __customModalTransitionStyleKey;
+static const char __customModalViewControllerKey;
+static const char __customParentViewControllerKey;
+static const char __customModalTransitionStyleKey;
 
 
 @implementation UIViewController (YICustomModal)
@@ -55,30 +55,15 @@ const char __customModalTransitionStyleKey;
     return customModalTransitionStyle;
 }
 
-- (UIView*)_rootView
-{
-    if (!self.view.window.rootViewController.view.superview) {
-        [NSException raise:NSInternalInconsistencyException format:@"window.rootViewController.view must be attached to window in order to use YICustomModal."];
-    }
-
-    return self.view.window.rootViewController.view;
-}
-
 - (void)_layoutCustomModalViewControllerVisible:(BOOL)isVisible
 {
-    UIView* rootView = [self _rootView];
     CGFloat statusBarHeight = STATUS_BAR_HEIGHT;
     
-    CGRect visibleFrame = rootView.bounds;
+    CGRect visibleFrame = self.view.window.bounds;
     
-    //
     // crop status-bar-frame if needed
-    //
-    // NOTE:
-    // When using UITabBar/NavigationController as window.rootViewController,
-    // rootView.frame is equal to [UIScreen mainScreen].bounds, not applicationFrame.
-    //
-    if (!self.customModalViewController.wantsFullScreenLayout && !CGRectEqualToRect(rootView.frame, [UIScreen mainScreen].applicationFrame)) {
+    BOOL isFullScreen = (self.customModalViewController.wantsFullScreenLayout || CGRectEqualToRect(self.view.window.frame, [UIScreen mainScreen].applicationFrame));
+    if (!isFullScreen) {
         visibleFrame.origin.y = statusBarHeight;
         visibleFrame.size.height -= statusBarHeight;
     }
@@ -118,7 +103,7 @@ const char __customModalTransitionStyleKey;
     [customModalViewController _setCustomParentViewController:self];
     
     self.customModalViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    [[self _rootView] addSubview:self.customModalViewController.view];
+    [self.view.window addSubview:self.customModalViewController.view];
     
     [self _layoutCustomModalViewControllerVisible:NO];
     
