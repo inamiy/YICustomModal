@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+YICustomModal.h"
+#import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 
 #define IS_IOS_AT_LEAST(ver)    ([[[UIDevice currentDevice] systemVersion] compare:ver] != NSOrderedAscending)
@@ -21,6 +22,17 @@ static const char __customModalTransitionStyleKey;
 
 
 @implementation UIViewController (YICustomModal)
+
+// convenient method to find top-most container view-controller
+- (UIViewController*)containerViewController
+{
+    UIViewController* vc = self;
+    while (1) {
+        if (!vc.parentViewController) break;
+        vc = vc.parentViewController;
+    }
+    return vc;
+}
 
 - (void)_setCustomModalViewController:(UIViewController*)customModalViewController;
 {
@@ -44,14 +56,14 @@ static const char __customModalTransitionStyleKey;
     return customParentViewController;
 }
 
-- (void)setCustomModalTransitionStyle:(UIModalTransitionStyle)customModalTransitionStyle
+- (void)setCustomModalTransitionStyle:(YICustomModalTransitionStyle)customModalTransitionStyle
 {
     objc_setAssociatedObject(self, &__customModalTransitionStyleKey, [NSNumber numberWithInt:customModalTransitionStyle], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIModalTransitionStyle)customModalTransitionStyle
+- (YICustomModalTransitionStyle)customModalTransitionStyle
 {
-    UIModalTransitionStyle customModalTransitionStyle = [objc_getAssociatedObject(self, &__customModalTransitionStyleKey) intValue];
+    YICustomModalTransitionStyle customModalTransitionStyle = [objc_getAssociatedObject(self, &__customModalTransitionStyleKey) intValue];
     return customModalTransitionStyle;
 }
 
@@ -72,20 +84,54 @@ static const char __customModalTransitionStyleKey;
     
     if (isVisible) {
         switch (self.customModalViewController.customModalTransitionStyle) {
-            case UIModalTransitionStyleCrossDissolve:
+            case YICustomModalTransitionStyleCrossDissolve:
                 self.customModalViewController.view.alpha = 1;
                 break;
+            case YICustomModalTransitionStyleZoomOut:
+            {
+                UIViewController* contaninerVC = self.containerViewController;
+                contaninerVC.view.layer.transform = CATransform3DMakeScale(0.8, 0.8, 0.8);
                 
+                self.customModalViewController.view.layer.transform = CATransform3DIdentity;
+                self.customModalViewController.view.alpha = 1;
+                break;
+            }
+            case YICustomModalTransitionStyleZoomIn:
+            {
+                UIViewController* contaninerVC = self.containerViewController;
+                contaninerVC.view.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2);
+                
+                self.customModalViewController.view.layer.transform = CATransform3DIdentity;
+                self.customModalViewController.view.alpha = 1;
+                break;
+            }
             default:
                 break;
         }
     }
     else {
         switch (self.customModalViewController.customModalTransitionStyle) {
-            case UIModalTransitionStyleCrossDissolve:
+            case YICustomModalTransitionStyleCrossDissolve:
                 self.customModalViewController.view.alpha = 0;
                 break;
+            case YICustomModalTransitionStyleZoomOut:
+            {
+                UIViewController* contaninerVC = self.containerViewController;
+                contaninerVC.view.layer.transform = CATransform3DIdentity;
                 
+                self.customModalViewController.view.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2);
+                self.customModalViewController.view.alpha = 0;
+                break;
+            }
+            case YICustomModalTransitionStyleZoomIn:
+            {
+                UIViewController* contaninerVC = self.containerViewController;
+                contaninerVC.view.layer.transform = CATransform3DIdentity;
+                
+                self.customModalViewController.view.layer.transform = CATransform3DMakeScale(0.8, 0.8, 0.8);
+                self.customModalViewController.view.alpha = 0;
+                break;
+            }
             default:
             {
                 CGRect hiddenFrame = visibleFrame;

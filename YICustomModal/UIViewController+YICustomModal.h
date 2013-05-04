@@ -8,17 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, YICustomModalTransitionStyle) {
+    YICustomModalTransitionStyleCoverVertical = 0,
+    YICustomModalTransitionStyleCrossDissolve,
+    YICustomModalTransitionStyleZoomOut,
+    YICustomModalTransitionStyleZoomIn,
+};
+
 //
 // custom modal, mainly for iOS5 youtube-fullscreen-dismiss bug
 // See also: https://github.com/inamiy/ModalYoutubeIOS5Bug
 //
 @interface UIViewController (YICustomModal)
 
+@property (nonatomic, readonly) UIViewController* containerViewController;
+
 @property (nonatomic, readonly) UIViewController* customModalViewController;
 @property (nonatomic, readonly) UIViewController* customParentViewController;
 
-// currently supports UIModalTransitionStyleCoverVertical & UIModalTransitionStyleCrossDissolve
-@property (nonatomic) UIModalTransitionStyle customModalTransitionStyle;
+@property (nonatomic) YICustomModalTransitionStyle customModalTransitionStyle;
 
 - (void)presentCustomModalViewController:(UIViewController*)customModalViewController
                                 animated:(BOOL)animated

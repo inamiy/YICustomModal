@@ -6,4 +6,5 @@
 //  Copyright (c) 2013年 Yasuhiro Inami. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "UIViewController+YICustomModal.h"

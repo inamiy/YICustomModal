@@ -47,11 +47,6 @@ static NSUInteger __counter = 0;
 
 - (IBAction)handleNormalModalButton:(id)sender
 {
-    if (self.customParentViewController) {
-        NSLog(@"WARNING: presenting custom modal view controller and then presenting normal one is not supported.");
-        return;
-    }
-    
     ViewController* vc = [self.storyboard instantiateInitialViewController];
     vc.title = [NSString stringWithFormat:@"%d",++__counter];
     
@@ -64,13 +59,9 @@ static NSUInteger __counter = 0;
 
 - (IBAction)handleCustomModalButton:(id)sender
 {
-    if (self.presentingViewController) {
-        NSLog(@"WARNING: presenting normal modal view controller and then presenting custom one is not supported.");
-        return;
-    }
-    
     ViewController* vc = [self.storyboard instantiateInitialViewController];
     vc.title = [NSString stringWithFormat:@"%d",++__counter];
+    vc.customModalTransitionStyle = YICustomModalTransitionStyleZoomOut;
 
 #if TEST_FULL_SCREEN
     vc.wantsFullScreenLayout = YES;
