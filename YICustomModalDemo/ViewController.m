@@ -9,7 +9,8 @@
 #import "ViewController.h"
 #import "UIViewController+YICustomModal.h"
 
-#define TEST_FULL_SCREEN    1
+#define TEST_FULL_SCREEN    0
+#define TEST_NAV_MODAL      1
 
 static NSUInteger __counter = 0;
 
@@ -23,7 +24,7 @@ static NSUInteger __counter = 0;
 
 - (void)dealloc
 {
-    NSLog(@"dealloc");
+    NSLog(@"%p dealloc",self);
 }
 
 - (void)viewDidLoad
@@ -31,6 +32,42 @@ static NSUInteger __counter = 0;
     [super viewDidLoad];
 	
     self.counterLabel.text = self.title;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"%p viewWillAppear",self);
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"%p viewDidAppear",self);
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSLog(@"%p viewWillDisappear",self);
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    NSLog(@"%p viewDidDisappear",self);
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    NSLog(@"%p viewWillLayoutSubviews",self);
+    [super viewWillLayoutSubviews];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    NSLog(@"%p viewDidLayoutSubviews",self);
+    [super viewDidLayoutSubviews];
 }
 
 - (void)viewDidUnload
@@ -54,6 +91,10 @@ static NSUInteger __counter = 0;
     vc.wantsFullScreenLayout = YES;
 #endif
     
+#if TEST_NAV_MODAL
+    vc = (id)[[UINavigationController alloc] initWithRootViewController:vc];
+#endif
+    
     [self presentViewController:vc animated:YES completion:NULL];
 }
 
@@ -61,11 +102,16 @@ static NSUInteger __counter = 0;
 {
     ViewController* vc = [self.storyboard instantiateInitialViewController];
     vc.title = [NSString stringWithFormat:@"%d",++__counter];
-    vc.customModalTransitionStyle = YICustomModalTransitionStyleZoomOut;
 
 #if TEST_FULL_SCREEN
     vc.wantsFullScreenLayout = YES;
 #endif
+    
+#if TEST_NAV_MODAL
+    vc = (id)[[UINavigationController alloc] initWithRootViewController:vc];
+#endif
+    
+    vc.customModalTransitionStyle = YICustomModalTransitionStyleZoomOut;
     
     [self presentCustomModalViewController:vc animated:YES completion:^{
         NSLog(@"did present");
@@ -81,6 +127,12 @@ static NSUInteger __counter = 0;
     // custom
     else if (self.customParentViewController) {
         [self.customParentViewController dismissCustomModalViewControllerAnimated:YES completion:^{
+            NSLog(@"did dismiss");
+        }];
+    }
+    // custom + TEST_NAV_MODAL
+    else if (self.navigationController.customParentViewController) {
+        [self.navigationController.customParentViewController dismissCustomModalViewControllerAnimated:YES completion:^{
             NSLog(@"did dismiss");
         }];
     }
